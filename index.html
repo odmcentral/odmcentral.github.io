@@ -686,8 +686,8 @@
                 </h4>
 
                 <nav class="social-nav">
-                  <a href="http://lattes.cnpq.br/2041492253830137"  target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
                   <a href="https://www.linkedin.com/in/luiz-henrique-cherri-08210529/" target="_blank"><i class="fa fa-linkedin"></i></a> 
+                  <a href="http://lattes.cnpq.br/2041492253830137"  target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
                   <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
@@ -714,8 +714,8 @@
                 </h4>
 
                 <nav class="social-nav">
+                  <a href="https://www.linkedin.com/in/leandromundim/"><i class="fa fa-linkedin" target="_blank"></i></a> 
                   <a href="http://lattes.cnpq.br/9422218269055551" target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
-                  <a href="https://www.linkedin.com/in/leandro-resende-mundim-b30b192a/"><i class="fa fa-linkedin" target="_blank"></i></a> 
                   <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
@@ -739,8 +739,8 @@
                 </h4>
 
                 <nav class="social-nav">
-                  <a href="http://lattes.cnpq.br/2474278895768267" target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
                   <a href="#"><i class="fa fa-linkedin" target="_blank"></i></a> 
+                  <a href="http://lattes.cnpq.br/2474278895768267" target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
                   <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
@@ -917,6 +917,20 @@
 </script>
 
 
+
+
+
+
   </body>
 </html>
 
+<?php
+$to      = 'nobody@example.com';
+$subject = 'the subject';
+$message = 'hello';
+$headers = 'From: webmaster@example.com' . "\r\n" .
+    'Reply-To: webmaster@example.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+?> 
