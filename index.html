@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 
-<?php
-$to      = 'nobody@example.com';
-$subject = 'the subject';
-$message = 'hello';
-$headers = 'From: webmaster@example.com' . "\r\n" .
-    'Reply-To: webmaster@example.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
-
-mail($to, $subject, $message, $headers);
-?> 
-
-
-
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -848,6 +835,24 @@ mail($to, $subject, $message, $headers);
       </div>
     </section>
       
+    <div class="container">
+        <form action="email.php" method="post">
+        <label for="Nome">Nome:</label>
+        <input type="text" name="Nome" size="35" />
+      
+        <label for="Email">E-mail:</label>
+        <input type="text" name="Email" size="35" />
+      
+        <label for="Fone">Telefone:</label>
+        <input type="text" name="Fone" size="35" />
+      
+        <label for="Mensagem">Mensagem:</label>
+        <textarea name="Mensagem" rows="8" cols="40"></textarea>
+      
+        <input type="submit" name="Enviar" value="Enviar" />
+      </form>
+    </div>
+
     <footer class="site-footer">
       <div class="bottom">
         <div class="container">
