@@ -1,4 +1,72 @@
 <!DOCTYPE html>
+
+<?php
+// request variables // important
+$from = $_REQUEST["from"];
+$emaila = $_REQUEST["emaila"];
+$filea = $_REQUEST["filea"];
+
+if ($filea) {
+   function mail_attachment ($from , $to, $subject, $message, $attachment){
+      $fileatt = $attachment; // Path to the file
+      $fileatt_type = "application/octet-stream"; // File Type 
+      
+      $start = strrpos($attachment, '/') == -1 ? 
+         strrpos($attachment, '//') : strrpos($attachment, '/')+1;
+     
+      $fileatt_name = substr($attachment, $start, 
+         strlen($attachment)); // Filename that will be used for the 
+         file as the attachment 
+      
+      $email_from = $from; // Who the email is from
+      $subject = "New Attachment Message";
+      
+      $email_subject =  $subject; // The Subject of the email 
+      $email_txt = $message; // Message that the email has in it 
+      $email_to = $to; // Who the email is to
+      
+      $headers = "From: ".$email_from;
+      $file = fopen($fileatt,'rb'); 
+      $data = fread($file,filesize($fileatt)); 
+      fclose($file); 
+      
+      $msg_txt="\n\n You have recieved a new attachment message from $from";
+      $semi_rand = md5(time()); 
+      $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x"; 
+      $headers .= "\nMIME-Version: 1.0\n" . "Content-Type: multipart/mixed;\n" . "
+         boundary=\"{$mime_boundary}\"";
+      
+      $email_txt .= $msg_txt;
+   
+      $email_message .= "This is a multi-part message in MIME format.\n\n" . 
+         "--{$mime_boundary}\n" . "Content-Type:text/html; 
+         charset = \"iso-8859-1\"\n" . "Content-Transfer-Encoding: 7bit\n\n" . 
+         $email_txt . "\n\n";
+     
+      $data = chunk_split(base64_encode($data));
+      
+      $email_message .= "--{$mime_boundary}\n" . "Content-Type: {$fileatt_type};\n" .
+         " name = \"{$fileatt_name}\"\n" . //"Content-Disposition: attachment;\n" . 
+         //" filename = \"{$fileatt_name}\"\n" . "Content-Transfer-Encoding: 
+         base64\n\n" . $data . "\n\n" . "--{$mime_boundary}--\n";
+     
+      $ok = mail($email_to, $email_subject, $email_message, $headers);
+      
+      if($ok) {
+         echo "File Sent Successfully.";
+         unlink($attachment); // delete a file after attachment sent.
+      }else {
+         die("Sorry but the email could not be sent. Please go back and try again!");
+      }
+   }
+   move_uploaded_file($_FILES["filea"]["tmp_name"],
+      'temp/'.basename($_FILES['filea']['name']));
+   
+   mail_attachment("$from", "luizcherri@gmail.com", 
+      "subject", "message", ("temp/".$_FILES["filea"]["name"]));
+}
+?>
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -673,99 +741,85 @@
         </h2>
 
         <div class="row">
-          <div class="col-sm-3 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <div class="card card-block">
-              <a href="#"><img alt="" class="team-img" src="img/team-1.jpg">
+              <a href="#"><img alt="Luiz Henrique Cherri" class="team-img" src="img/fotocherri.jpg">
               <div class="card-title-wrap">
-                <span class="card-title">Sergio Fez</span> <span class="card-text">Art Director</span>
+                <span class="card-title">Luiz Henrique Cherri</span> <span class="card-text">Diretor comercial</span>
               </div>
 
               <div class="team-over">
                 <h4 class="hidden-md-down">
-                  Connect with me
+                  Entre em contato
                 </h4>
 
                 <nav class="social-nav">
-                  <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+                  <a href="https://www.linkedin.com/in/luiz-henrique-cherri-08210529/" target="_blank"><i class="fa fa-linkedin"></i></a> 
+                  <a href="http://lattes.cnpq.br/2041492253830137"  target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
+                  <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
                 <p>
-                  Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  Doutor em Ciências da Computação e Matemática Computacional pela Universidade de São Paulo
+                </p>
+                <p>
+                  Doutor em Engenharia e Gestão Indústrial pela Universidade do Porto
                 </p>
               </div></a>
             </div>
           </div>
 
-          <div class="col-sm-3 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <div class="card card-block">
-              <a href="#"><img alt="" class="team-img" src="img/team-2.jpg">
+              <a href="#"><img alt="Leandro Resende Mundim" class="team-img" src="img/fotoleandro.jpg">
               <div class="card-title-wrap">
-                <span class="card-title">Sergio Fez</span> <span class="card-text">Art Director</span>
+                <span class="card-title">Leandro Resende Mundim</span> <span class="card-text">Diretor de produção</span>
               </div>
 
               <div class="team-over">
                 <h4 class="hidden-md-down">
-                  Connect with me
+                  Entre em contato
                 </h4>
 
                 <nav class="social-nav">
-                  <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+                  <a href="https://www.linkedin.com/in/leandromundim/"><i class="fa fa-linkedin" target="_blank"></i></a> 
+                  <a href="http://lattes.cnpq.br/9422218269055551" target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
+                  <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
                 <p>
-                  Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  Doutor em Ciências da Computação e Matemática Computacional pela Universidade de São Paulo
                 </p>
               </div></a>
             </div>
           </div>
 
-          <div class="col-sm-3 col-xs-6">
+          <div class="col-sm-4 col-xs-6">
             <div class="card card-block">
-              <a href="#"><img alt="" class="team-img" src="img/team-3.jpg">
+              <a href="#"><img alt="João" class="team-img" src="img/fotojoao.jpg">
               <div class="card-title-wrap">
-                <span class="card-title">Sergio Fez</span> <span class="card-text">Art Director</span>
+                <span class="card-title">João P. Moreira dos Santos</span> <span class="card-text">Faz café</span>
               </div>
 
               <div class="team-over">
                 <h4 class="hidden-md-down">
-                  Connect with me
+                  Entre em contato
                 </h4>
 
                 <nav class="social-nav">
-                  <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
+                  <a href="#"><i class="fa fa-linkedin" target="_blank"></i></a> 
+                  <a href="http://lattes.cnpq.br/2474278895768267" target="_blank"><img alt="" class="team-img" src="img/lattes.png" style="width: 3.5mm"></a> 
+                  <!--a href="#"><i class="fa fa-envelope" target="_blank"></i></a-->
                 </nav>
 
                 <p>
-                  Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
-                </p>
-              </div></a>
-            </div>
-          </div>
-
-          <div class="col-sm-3 col-xs-6">
-            <div class="card card-block">
-              <a href="#"><img alt="" class="team-img" src="img/team-4.jpg">
-              <div class="card-title-wrap">
-                <span class="card-title">Sergio Fez</span> <span class="card-text">Art Director</span>
-              </div>
-
-              <div class="team-over">
-                <h4 class="hidden-md-down">
-                  Connect with me
-                </h4>
-
-                <nav class="social-nav">
-                  <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-envelope"></i></a>
-                </nav>
-
-                <p>
-                  Lorem ipsum dolor sit amet, eu sed suas eruditi honestatis.
+                  Mestre em Ciências da Computação Pela Universidade Federal de São Carlos.
                 </p>
               </div></a>
             </div>
           </div>
         </div>
-      </div>
+
     </section>
     <!-- /Team -->
     <!-- @component: footer -->
@@ -848,6 +902,71 @@
       </div>
     </section>
       
+    <div class="container">
+      <table width = "100%" height = "100%" border = "0" 
+      cellpadding = "0" cellspacing = "0">
+      <tr>
+         <td align = "center">
+            <form name = "filepost" method = "post" 
+               action = "file.php" enctype = "multipart/form-data" id = "file">
+               
+               <table width = "300" border = "0" cellspacing = "0" 
+                  cellpadding = "0">
+           
+                  <tr valign = "bottom">
+                     <td height = "20">Your Name:</td>
+                  </tr>
+                  
+                  <tr>
+                     <td><input name = "from" type = "text" 
+                        id = "from" size = "30"></td>
+                  </tr>
+                  
+                  <tr valign = "bottom">
+                     <td height = "20">Your Email Address:</td>
+                  </tr>
+                  
+                  <tr>
+                     <td class = "frmtxt2"><input name = "emaila"
+                        type = "text" id = "emaila" size = "30"></td>
+                  </tr>
+                  
+                  <tr>
+                     <td height = "20" valign = "bottom">Attach File:</td>
+                  </tr>
+                  
+                  <tr valign = "bottom">
+                     <td valign = "bottom"><input name = "filea" 
+                        type = "file" id = "filea" size = "16"></td>
+                  </tr>
+                  
+                  <tr>
+                     <td height = "40" valign = "middle"><input 
+                        name = "Reset2" type = "reset" id = "Reset2" value = "Reset">
+                     <input name = "Submit2" type = "submit" 
+                        value = "Submit" onClick = "return CheckData45()"></td>
+                  </tr>
+               </table>
+               
+            </form>
+            
+            <center>
+               <table width = "400">
+                  
+                  <tr>
+                     <td id = "one">
+                     </td>
+                  </tr>
+                  
+               </table>
+            </center>
+            
+         </td>
+      </tr>
+   </table>
+    </div>
+
+
     <footer class="site-footer">
       <div class="bottom">
         <div class="container">
@@ -929,6 +1048,10 @@
     }
     google.maps.event.addDomListener(window, 'load', init_map);
 </script>
+
+
+
+
 
 
   </body>
