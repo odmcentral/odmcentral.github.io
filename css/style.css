@@ -1004,12 +1004,12 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin: 35px 0;
   }
   h1 {
-    font-size: 32px;
+    font-size: 0px;
     margin: 0;
   }
   h2,
   .tagline {
-    font-size: 18px;
+    font-size: 0px;
   }
   h2 {
     margin-bottom: 25px;
