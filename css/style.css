@@ -159,6 +159,13 @@ a:hover {
   color: #fff;
 }
 
+.tagline-heroh2 {
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  margin: 45px 0 75px 0;
+  color: #fff;
+}
+
 /* ==================================================
   Header Styling
 ================================================== */
@@ -784,8 +791,17 @@ body.mobile-nav-active #mobile-nav-toggle {
   Method Section
   ================================================== */
 #metod {
-  padding: 5%
+  padding: 5%;
 }
+
+#metod .full{
+  display: block;
+}
+#metod .small{
+  display: none;
+}
+
+
 
 #metod h1{
   font-family: "Raleway", Helvetica, Arial, sans-serif;
@@ -794,15 +810,8 @@ body.mobile-nav-active #mobile-nav-toggle {
   text-align: center;
 }
 
-/*
-.img-circle {
-  -webkit-animation: fadein 2.5s; // Safari and Chrome 
-  -moz-animation: fadein 2.5s; // Firefox 
-  -ms-animation: fadein 2.5s; // Internet Explorer 
-  -o-animation: fadein 2.5s; // Opera 
-  animation: fadein 2.5s;
-}
-*/
+
+
 
 @keyframes fadein {
   from { opacity: 0; }
@@ -985,6 +994,16 @@ body.mobile-nav-active #mobile-nav-toggle {
   Responsive Styling
   ================================================== */
 @media (max-width: 61.9em) {
+  .tagline-hidemedia {
+    font-size: 0px;
+  }
+
+  .tagline-heroh2 {
+    font-size: 0px;
+    display: none;
+  }
+
+
   section,
   .block,
   .cta {
@@ -1001,21 +1020,23 @@ body.mobile-nav-active #mobile-nav-toggle {
     margin-bottom: 35px;
   }
   .tagline {
-    margin: 35px 0;
+    margin: 32px 0;
   }
   h1 {
-    font-size: 0px;
+    font-size: 32px;
     margin: 0;
   }
   h2,
   .tagline {
-    font-size: 0px;
+    font-size: 26px;
   }
+
   h2 {
     margin-bottom: 25px;
   }
   h3 {
-    font-size: 14px;
+    font-size: 20px;
+    padding-top: 20px;
   }
   .hero {
     padding: 75px 0;
@@ -1033,7 +1054,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     font-size: 18px !important;
   }
   .portfolio-grid .card .card-text {
-    font-size: 13px;
+    font-size: 15px;
   }
   .team .team-over {
     padding-top: 20px;
@@ -1059,4 +1080,14 @@ body.mobile-nav-active #mobile-nav-toggle {
     padding-left: 30px;
     padding-right: 30px;
   }
+
+
+  #metod .full{
+    display: none;
+  }
+  #metod .small{
+    display: block;
+  }
+
+
 }
